@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StartupIdea Validator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --paper: #F7F3EA;
+    --paper-line: #E4DCC8;
+    --ink: #1E2430;
+    --ink-soft: #5C6270;
+    --seal: #A83A32;
+    --seal-dark: #7C2A24;
+    --gold: #B08D2B;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    background-image: linear-gradient(var(--paper-line) 1px, transparent 1px);
+    background-size: 100% 32px;
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 60px 24px 100px;
+  }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--seal);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 1.05;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--paper-line);
+    padding-bottom: 32px;
+  }
+
+  form {
+    background: #fff;
+    border: 1px solid var(--paper-line);
+    border-radius: 4px;
+    padding: 24px;
+    box-shadow: 0 1px 0 rgba(30,36,48,0.03);
+  }
+
+  label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    width: 100%;
+    border: 1px solid var(--paper-line);
+    border-radius: 3px;
+    padding: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    resize: vertical;
+    min-height: 100px;
+    background: var(--paper);
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: var(--seal);
+  }
+
+  button {
+    margin-top: 16px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 13px 28px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  button:hover { background: var(--seal-dark); }
+
+  .error {
+    margin-top: 24px;
+    padding: 14px 16px;
+    background: #FBEAE8;
+    border-left: 3px solid var(--seal);
+    color: var(--seal-dark);
+    font-size: 14px;
+    border-radius: 2px;
+  }
+
+  /* ---- Result card ---- */
+
+  .result-card {
+    margin-top: 48px;
+    background: #fff;
+    border: 1px solid var(--paper-line);
+    border-radius: 6px;
+    padding: 32px;
+    box-shadow: 0 4px 24px rgba(30,36,48,0.06);
+  }
+
+  .result-top {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .seal {
+    flex-shrink: 0;
+    width: 128px;
+    height: 128px;
+    border: 3px solid var(--seal);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-6deg);
+    position: relative;
+  }
+
+  .seal::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--seal);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .seal-score {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: var(--seal);
+    line-height: 1;
+  }
+
+  .seal-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--seal);
+    margin-top: 4px;
+  }
+
+  .result-top-text { flex: 1; }
+
+  .idea-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .idea-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    margin: 0 0 12px;
+  }
+
+  .verdict-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .verdict-strong { background: #E4F3E6; color: #2E7D42; }
+  .verdict-medium { background: #FCF1DA; color: var(--gold); }
+  .verdict-low     { background: #FBEAE8; color: var(--seal-dark); }
+
+  .progress-track {
+    margin-top: 28px;
+    height: 8px;
+    background: var(--paper);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--paper-line);
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 20px;
+  }
+
+  .progress-fill.verdict-strong { background: #2E7D42; }
+  .progress-fill.verdict-medium { background: var(--gold); }
+  .progress-fill.verdict-low { background: var(--seal); }
+
+  .section-block {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--paper-line);
+  }
+
+  h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .startup-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .startup-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+    border-radius: 3px;
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .startup-list .score-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .req-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .req-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+    border-radius: 3px;
+    padding: 12px 14px;
+  }
+
+  .req-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--seal);
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Productivity / Market Signal</div>
+  <h1>StartupIdea Validator</h1>
+  <p class="subtitle">Enter your startup idea and get an analysis of its viability based on market trends and similar startups.</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <label for="idea_text">Your idea</label>
+    <textarea id="idea_text" name="idea_text" placeholder="Ex: AI powered fitness app for students..."></textarea>
+    <br>
+    <button type="submit">Analyze Idea</button>
+  </form>
+
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  {% if success %}
+    <div class="result-card">
+
+      <div class="result-top">
+        <div class="seal">
+          <div class="seal-score">{{ score }}</div>
+          <div class="seal-label">/ 100</div>
+        </div>
+
+        <div class="result-top-text">
+          <div class="idea-eyebrow">Submitted idea</div>
+          <p class="idea-text">{{ idea_text }}</p>
+          <span class="verdict-badge {{ verdict_class }}">{{ verdict }}</span>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill {{ verdict_class }}" style="width: {{ score }}%"></div>
+      </div>
+
+      {% if keywords %}
+        <div class="section-block">
+          <h3>Extracted Keywords</h3>
+          <div class="tag-row">
+            {% for kw in keywords %}
+              <span class="tag">{{ kw }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="section-block">
+        <h3>Similar Startups — Trend Match</h3>
+        <ul class="startup-list">
+          {% for name, trend_score in similar_startups %}
+            <li>
+              <span>{{ name }}</span>
+              <span class="score-tag">{{ trend_score }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if requirements %}
+        <div class="section-block">
+          <h3>How To Start — What You'll Need</h3>
+          <ul class="req-list">
+            {% for item in requirements %}
+              <li><span class="req-num">{{ forloop.counter }}</span> {{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+    </div>
+  {% endif %}
+
+</div>
+</body>
+</html>
