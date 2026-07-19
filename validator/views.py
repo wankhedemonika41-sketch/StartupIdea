@@ -29,7 +29,7 @@ trend_data = {
 }
 
 startup_requirements = {
-    "food delivery": ["Kitchen/cloud kitchen space", "Delivery partners ani vehicles", "FSSAI food license", "Packaging supplies", "Delivery app/website"],
+    "food delivery": ["Kitchen/cloud kitchen space", "Delivery partners and vehicles", "FSSAI food license", "Packaging supplies", "Delivery app/website"],
     "ai tool": ["Skilled developers/ML engineers", "Cloud server (AWS/GCP)", "Dataset access", "SaaS subscription model", "Beta testers"],
     "fitness app": ["App developers", "Certified fitness trainers content", "Server/hosting", "Payment gateway integration", "Marketing budget"],
     "online education": ["Subject matter experts/teachers", "Video recording setup", "LMS platform", "Content library", "Digital marketing"],
@@ -44,7 +44,7 @@ startup_requirements = {
     "elder care": ["Trained caregiving staff", "Medical tie-ups/nurses", "Home visit logistics or facility space", "Licenses for healthcare services", "Trust-building marketing"],
     "crypto wallet": ["Blockchain developers", "Security audits", "Regulatory/legal compliance", "Server infrastructure", "User trust & KYC system"],
     "language learning": ["Language experts/tutors", "App/website platform", "Course content creation", "Payment gateway", "Community/practice features"],
-    "beauty parlour": ["Shop space/location (good footfall area)", "Trained beauticians/staff", "Equipment ani cosmetic supplies", "Shop license/registration", "Local marketing ani word of mouth"],
+    "beauty parlour": ["Shop space/location (good footfall area)", "Trained beauticians/staff", "Equipment and cosmetic supplies", "Shop license/registration", "Local marketing and word of mouth"],
 }
 
 default_requirements = [
