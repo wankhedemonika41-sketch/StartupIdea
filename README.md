@@ -105,3 +105,19 @@ Visit **http://127.0.0.1:8000/** in your browser.
 **Endpoint:** `POST /api/analyze/`
 
 **Body (form-data or x-www-form-urlencoded):**
+
+**Response:**
+```json
+{
+  "idea_text": "ai powered fitness app for students",
+  "score": 81.0,
+  "similar_startups": [["fitness app", 70], ["ai tool", 92]],
+  "requirements": ["App developers", "Certified fitness trainers content", "..."]
+}
+```
+
+---
+
+## Author
+
+Built by **Monika Wankhede** as a Python + Django learning project.
