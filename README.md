@@ -60,3 +60,48 @@ StartupIdea/
 ├── manage.py
 └── requirements.txt
 ```
+
+---
+
+## Installation
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/wankhedemonika41-sketch/StartupIdea.git
+cd StartupIdea
+```
+
+### 2. Create and activate a virtual environment
+```bash
+python -m venv myvenv
+myvenv\Scripts\activate      # Windows
+source myvenv/bin/activate   # Mac/Linux
+```
+
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Set up MongoDB
+Make sure MongoDB is running locally on `mongodb://localhost:27017/`. You can install [MongoDB Community Server](https://www.mongodb.com/try/download/community) and [MongoDB Compass](https://www.mongodb.com/products/compass) to view your data.
+
+### 5. Run migrations
+```bash
+python manage.py migrate
+```
+
+### 6. Run the server
+```bash
+python manage.py runserver
+```
+
+Visit **http://127.0.0.1:8000/** in your browser.
+
+---
+
+## API Usage
+
+**Endpoint:** `POST /api/analyze/`
+
+**Body (form-data or x-www-form-urlencoded):**
