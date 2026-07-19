@@ -44,15 +44,19 @@ StartupIdea understands raw text like *"AI powered fitness app for students"* or
 
 ## Project Structure
 
+## Project Structure
+
+```text
 StartupIdea/
-├── main.py                  # Standalone script for testing
-├── keyword_extractor.py     # Custom module - keyword
-├── models.py                # IdeaProfile, TrendMatcher etc
-├── db.py                    # MongoDB connection + CRUD opr
-├── config/                  # Django project settings
-├── validator/               # Django app
-│   ├── views.py             # Form view + DRF API view
-│   ├── serializers.py       # DRF serializers
-│   └── templates/validator/ # HTML templates
+├── main.py                    # Standalone script for testing core logic
+├── keyword_extractor.py       # Custom module - keyword extraction, exceptions, lambda sorting
+├── models.py                  # IdeaProfile, TrendMatcher, ScoreEngine classes + threading
+├── db.py                      # MongoDB connection + CRUD functions
+├── config/                    # Django project settings
+├── validator/                 # Django app
+│   ├── views.py               # Form view + DRF API view
+│   ├── serializers.py         # DRF serializers
+│   └── templates/validator/   # HTML templates
 ├── manage.py
 └── requirements.txt
+```
