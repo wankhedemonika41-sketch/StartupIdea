@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# Apla U1-U4 cha logic import kar
+# import logic of U1-U4
 from keyword_extractor import extract_keywords, sort_by_score, EmptyIdeaError
 from models import TrendMatcher, ScoreEngine
 from db import save_idea, get_all_ideas
